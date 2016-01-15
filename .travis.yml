@@ -1,0 +1,24 @@
+language: python
+python:
+    - "2.7"
+
+# Cache PlatformIO packages using Travis CI container-based infrastructure
+sudo: false
+cache:
+    directories:
+        - "~/.platformio"
+
+env:
+    - PLATFORMIO_CI_SRC=examples/BasicExample/BasicExample.ino
+    - PLATFORMIO_CI_SRC=examples/DeviceExample/DeviceExample.ino
+    - PLATFORMIO_CI_SRC=examples/FullExample/FullExample.ino
+    - PLATFORMIO_CI_SRC=examples/KitchenSink/KitchenSink.ino
+    - PLATFORMIO_CI_SRC=examples/SatElevTracker/SatElevTracker.ino
+    - PLATFORMIO_CI_SRC=examples/SatelliteTracker/SatelliteTracker.ino
+    - PLATFORMIO_CI_SRC=examples/UsingCustomFields/UsingCustomFields.ino
+
+install:
+    - pip install -U platformio
+
+script:
+    - platformio ci --lib=. --board=uno --board=megaatmega1280 --board=teensy31
